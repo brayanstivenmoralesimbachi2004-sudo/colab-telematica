@@ -1,0 +1,89 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/brayanstivenmoralesimbachi2004-sudo/colab-telematica/blob/main/gif-hola\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "source": [
+        "# Sección nueva"
+      ],
+      "metadata": {
+        "id": "axqpvjqJ0Hl2"
+      }
+    },
+    {
+      "cell_type": "code",
+      "source": [
+        "# Instalamos Pillow (por si no está en Colab)\n",
+        "!pip install pillow\n",
+        "\n",
+        "from PIL import Image, ImageDraw, ImageFont\n",
+        "import os\n",
+        "\n",
+        "# Crear una carpeta temporal para los fotogramas\n",
+        "os.makedirs(\"frames\", exist_ok=True)\n",
+        "\n",
+        "# Fuente por defecto (Colab no siempre trae fuentes externas)\n",
+        "try:\n",
+        "    font = ImageFont.truetype(\"DejaVuSans-Bold.ttf\", 60)\n",
+        "except:\n",
+        "    font = ImageFont.load_default()\n",
+        "\n",
+        "# Generar varios cuadros con \"HOLA :)\" moviéndose\n",
+        "frames = []\n",
+        "for i in range(10):\n",
+        "    # Crear una imagen en blanco\n",
+        "    img = Image.new(\"RGB\", (300, 150), (255, 255, 255))\n",
+        "    draw = ImageDraw.Draw(img)\n",
+        "\n",
+        "    # Texto principal\n",
+        "    draw.text((50, 40), \"HOLA\", font=font, fill=(0, 0, 0))\n",
+        "\n",
+        "    # Carita feliz que se mueve\n",
+        "    x = 200 + (i * 5) % 40  # movimiento horizontal\n",
+        "    y = 80\n",
+        "    draw.text((x, y), \":)\", font=font, fill=(0, 0, 0))\n",
+        "\n",
+        "    frames.append(img)\n",
+        "\n",
+        "# Guardar como GIF animado\n",
+        "frames[0].save(\"hola.gif\",\n",
+        "               save_all=True,\n",
+        "               append_images=frames[1:],\n",
+        "               duration=200, # velocidad (ms por frame)\n",
+        "               loop=0)\n",
+        "\n",
+        "print(\"✅ GIF creado como hola.gif\")\n",
+        "from IPython.display import Image\n",
+        "Image(filename=\"hola.gif\")\n"
+      ],
+      "metadata": {
+        "id": "zrwToRao0Km3"
+      },
+      "execution_count": null,
+      "outputs": []
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "name": "Te damos la bienvenida a Colab",
+      "toc_visible": true,
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3",
+      "name": "python3"
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
